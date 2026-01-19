@@ -1,0 +1,26 @@
+<div class="app-layout" [class.authenticated]="isAuthenticated()" [class.sidebar-mobile-open]="isSidebarMobileOpen">
+    @if (isAuthenticated()) {
+    <header class="mobile-header">
+        <button class="mobile-menu-toggle" (click)="sidebar.toggleMobile()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+            </svg>
+        </button>
+        <span class="mobile-brand-name">SmartHome</span>
+    </header>
+
+    <app-sidebar #sidebar (collapsedChange)="isSidebarCollapsed = $event"
+        (mobileOpenChange)="isSidebarMobileOpen = $event"></app-sidebar>
+
+    <div class="sidebar-backdrop" *ngIf="isSidebarMobileOpen" (click)="sidebar.closeMobile()"></div>
+    }
+
+    <main class="main-content" [class.collapsed]="isSidebarCollapsed">
+        <router-outlet></router-outlet>
+    </main>
+</div>
+
+<!-- Foreground Notifications -->
+<app-toast [show]="showToast" [title]="toastTitle" [message]="toastMessage" [icon]="toastIcon"
+    (closed)="onToastClosed()">
+</app-toast>

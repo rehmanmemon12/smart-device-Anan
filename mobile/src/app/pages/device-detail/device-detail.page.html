@@ -1,0 +1,100 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/devices" mode="ios" text=""></ion-back-button>
+        </ion-buttons>
+        <ion-title>Control Center</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    @if (isLoading) {
+    <div class="state-container loading">
+        <ion-spinner name="crescent"></ion-spinner>
+    </div>
+    } @else if (error) {
+    <div class="state-container error">
+        <div class="icon-blob danger">
+            <ion-icon name="alert-circle-outline"></ion-icon>
+        </div>
+        <h2>Something went wrong</h2>
+        <p>{{ error }}</p>
+        <ion-button mode="ios" expand="block" (click)="retryLoad()" fill="outline">Try Again</ion-button>
+    </div>
+    } @else if (device) {
+    <div class="detail-container">
+        <!-- Hero Section -->
+        <div class="hero-section" [class.offline]="!device.isOnline">
+            <div class="device-glow"></div>
+            <div class="device-icon-large">
+                <span>{{ getDeviceIcon(device.type) }}</span>
+            </div>
+            <div class="hero-text">
+                <h1>{{ device.name }}</h1>
+                <p>{{ device.location }}</p>
+            </div>
+            <ion-badge [class]="device.isOnline ? 'online' : 'offline'">
+                {{ device.isOnline ? 'Active' : 'Offline' }}
+            </ion-badge>
+        </div>
+
+        <!-- Status Grid -->
+        <div class="stats-grid">
+            <div class="stat-box">
+                <span class="label">Power</span>
+                <span class="value" [class.on]="device.isOn">{{ device.isOn ? 'ON' : 'OFF' }}</span>
+            </div>
+            <div class="stat-box">
+                <span class="label">Battery</span>
+                <span class="value" [class]="getBatteryColor(device.batteryPercentage)">
+                    {{ device.batteryPercentage }}%
+                </span>
+            </div>
+        </div>
+
+        <!-- Controls Section -->
+        <div class="controls-card">
+            <div class="control-header">
+                <h2>Quick Controls</h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="control-row">
+                <div class="control-info">
+                    <ion-icon name="power-outline" [class.active]="device.isOn"></ion-icon>
+                    <div class="text">
+                        <h3>Master Switch</h3>
+                        <p>Turn device on or off</p>
+                    </div>
+                </div>
+                <ion-toggle [checked]="device.isOn" (ionChange)="togglePower()"
+                    [disabled]="!device.isOnline || isSaving" mode="ios"></ion-toggle>
+            </div>
+
+            <div class="control-spacing"></div>
+
+            <div class="control-row-stack">
+                <div class="control-info">
+                    <ion-icon name="sunny-outline" class="active"></ion-icon>
+                    <div class="text">
+                        <h3>Output Level</h3>
+                        <p>Adjust {{ device.type === 'thermostat' ? 'temperature' : 'brightness' }}</p>
+                    </div>
+                    <span class="value-bubble">{{ device.brightness }}%</span>
+                </div>
+                <ion-range [value]="device.brightness" (ionInput)="onBrightnessChange($event)"
+                    (ionKnobMoveEnd)="saveBrightness()" [min]="0" [max]="100"
+                    [disabled]="!device.isOnline || !device.isOn || isSaving" mode="ios" class="custom-range">
+                </ion-range>
+            </div>
+        </div>
+
+        @if (!device.isOnline) {
+        <div class="premium-alert">
+            <ion-icon name="wifi-outline"></ion-icon>
+            <p>Device is currently offline. Please check its connection status.</p>
+        </div>
+        }
+    </div>
+    }
+</ion-content>

@@ -1,0 +1,12 @@
+{
+    "name": "smart-device-api",
+    "version": "1.0.0",
+    "description": "Mock API for Smart Device Dashboard",
+    "scripts": {
+        "start": "json-server --watch db.json --routes routes.json --port 3000",
+        "start:cors": "json-server --watch db.json --routes routes.json --port 3000 --middlewares ./cors.js"
+    },
+    "dependencies": {
+        "json-server": "^0.17.4"
+    }
+}

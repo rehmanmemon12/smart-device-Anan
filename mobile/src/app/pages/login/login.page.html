@@ -1,0 +1,60 @@
+<ion-content [fullscreen]="true">
+    <div class="login-wrapper">
+        <div class="background-circles">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+        </div>
+
+        <div class="login-content">
+            <div class="header-section">
+                <div class="glass-logo">
+                    <ion-icon name="hardware-chip-outline"></ion-icon>
+                </div>
+                <h1>Smart Dashboard</h1>
+                <p>Welcome back! Please sign in.</p>
+            </div>
+
+            <form (ngSubmit)="onSubmit()" class="login-form">
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <div class="input-field">
+                        <ion-icon name="mail-outline"></ion-icon>
+                        <ion-input type="email" [(ngModel)]="email" name="email" placeholder="e.g. admin@anansky.com"
+                            [disabled]="isLoading"></ion-input>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <div class="input-field">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                        <ion-input type="password" [(ngModel)]="password" name="password" placeholder="••••••••"
+                            [disabled]="isLoading"></ion-input>
+                    </div>
+                </div>
+
+                @if (error) {
+                <div class="error-container">
+                    <ion-icon name="alert-circle"></ion-icon>
+                    <span>{{ error }}</span>
+                </div>
+                }
+
+                <button type="submit" class="submit-btn" [disabled]="isLoading">
+                    @if (isLoading) {
+                    <ion-spinner name="crescent"></ion-spinner>
+                    <span>Connecting...</span>
+                    } @else {
+                    <span>Sign In</span>
+                    <ion-icon name="arrow-forward"></ion-icon>
+                    }
+                </button>
+            </form>
+
+            <div class="footer-hint">
+                <p>Use any credentials to access the hub</p>
+                <div class="line"></div>
+            </div>
+        </div>
+    </div>
+</ion-content>

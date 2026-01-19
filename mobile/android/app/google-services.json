@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "146660949506",
+    "project_id": "smart-device-dashboard-b1ea0",
+    "storage_bucket": "smart-device-dashboard-b1ea0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146660949506:android:6687709796582cef3ff11b",
+        "android_client_info": {
+          "package_name": "com.anansky.dashboard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqFM8cw46YbMzILjpFAch8C7GKuQHW1_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

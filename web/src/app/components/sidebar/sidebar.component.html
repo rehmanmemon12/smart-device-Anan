@@ -1,0 +1,45 @@
+<aside class="sidebar" [class.collapsed]="isCollapsed" [class.mobile-open]="isMobileOpen">
+    <div class="sidebar-header">
+        <button class="close-mobile-btn" (click)="closeMobile()" title="Close Sidebar">✕</button>
+        <button class="toggle-btn" (click)="toggleSidebar()" title="Toggle Sidebar">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+            </svg>
+        </button>
+    </div>
+
+    <div class="sidebar-brand">
+        <div class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+            </svg>
+        </div>
+        <span class="brand-name">SmartHome</span>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a routerLink="/devices" routerLinkActive="active" class="nav-item">
+            <span class="icon">📱</span>
+            <span class="label">Devices</span>
+        </a>
+        <a routerLink="/alerts" routerLinkActive="active" class="nav-item">
+            <span class="icon">🔔</span>
+            <span class="label">Alerts</span>
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="user-profile">
+            <div class="avatar">{{ getCurrentUser()?.name?.charAt(0) || 'U' }}</div>
+            <div class="user-info">
+                <span class="name">{{ getCurrentUser()?.name }}</span>
+                <span class="email">{{ getCurrentUser()?.email }}</span>
+            </div>
+        </div>
+        <button class="logout-btn" (click)="logout()" title="Logout">
+            <span class="icon">🚪</span>
+            <span class="label">Logout</span>
+        </button>
+    </div>
+</aside>

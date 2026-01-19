@@ -1,0 +1,83 @@
+<div class="devices-page">
+    <div class="page-header">
+        <h1>Smart Devices</h1>
+        <p>Manage and monitor your connected devices</p>
+    </div>
+
+    <main class="page-content">
+        <div class="search-bar">
+            <div class="search-input-wrapper">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="M21 21l-4.35-4.35" />
+                </svg>
+                <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="onSearch()"
+                    placeholder="Search devices by name, location, or type..." />
+                @if (searchQuery) {
+                <button class="clear-btn" (click)="clearSearch()">×</button>
+                }
+            </div>
+            <button class="refresh-btn" (click)="loadDevices()" [disabled]="isLoading">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M23 4v6h-6M1 20v-6h6" />
+                    <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
+                </svg>
+            </button>
+        </div>
+
+        @if (isLoading) {
+        <div class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading devices...</p>
+        </div>
+        } @else if (error) {
+        <div class="error-state">
+            <div class="error-icon">⚠️</div>
+            <h2>Connection Error</h2>
+            <p>{{ error }}</p>
+            <button (click)="loadDevices()">Try Again</button>
+        </div>
+        } @else if (filteredDevices.length === 0) {
+        <div class="empty-state">
+            <div class="empty-icon">🔍</div>
+            @if (searchQuery) {
+            <h2>No devices found</h2>
+            <p>No devices match "{{ searchQuery }}"</p>
+            <button (click)="clearSearch()">Clear Search</button>
+            } @else {
+            <h2>No devices</h2>
+            <p>There are no devices to display</p>
+            }
+        </div>
+        } @else {
+        <div class="devices-grid">
+            @for (device of filteredDevices; track device.id) {
+            <a [routerLink]="['/devices', device.id]" class="device-card">
+                <div class="device-header">
+                    <span class="device-icon">{{ getDeviceIcon(device.type) }}</span>
+                    <span class="device-status" [class]="getStatusClass(device)">
+                        {{ device.isOnline ? 'Online' : 'Offline' }}
+                    </span>
+                </div>
+                <h3 class="device-name">{{ device.name }}</h3>
+                <p class="device-location">{{ device.location }}</p>
+                <div class="device-info">
+                    <div class="battery" [class]="getBatteryClass(device)">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2zm3 5h1v4h-1z" />
+                        </svg>
+                        {{ device.batteryPercentage }}%
+                    </div>
+                    <div class="last-updated">
+                        {{ getTimeAgo(device.lastUpdated) }}
+                    </div>
+                </div>
+            </a>
+            }
+        </div>
+        <p class="device-count">Showing {{ filteredDevices.length }} of {{ devices.length }} devices</p>
+        }
+    </main>
+</div>

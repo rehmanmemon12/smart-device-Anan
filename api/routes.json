@@ -1,0 +1,5 @@
+{
+    "/api/auth/login": "/users",
+    "/api/devices": "/devices",
+    "/api/devices/:id": "/devices/:id"
+}

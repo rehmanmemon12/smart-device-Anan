@@ -1,0 +1,104 @@
+<div class="device-detail-page">
+    <div class="page-header">
+        <a routerLink="/devices" class="back-link-top">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Back to Devices
+        </a>
+        <h1>Device Details</h1>
+    </div>
+
+    <main class="page-content">
+        @if (feedbackMessage) {
+        <div class="feedback" [class]="feedbackType">
+            {{ feedbackMessage }}
+        </div>
+        }
+
+        @if (isLoading) {
+        <div class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading device...</p>
+        </div>
+        } @else if (error) {
+        <div class="error-state">
+            <div class="error-icon">⚠️</div>
+            <h2>Error</h2>
+            <p>{{ error }}</p>
+            <a routerLink="/devices" class="back-link">Go back to devices</a>
+        </div>
+        } @else if (device) {
+        <div class="device-card">
+            <div class="device-header">
+                <div class="device-icon">{{ getDeviceIcon(device.type) }}</div>
+                <div class="device-title">
+                    <h2>{{ device.name }}</h2>
+                    <p>{{ device.location }} • {{ device.type | titlecase }}</p>
+                </div>
+                <div class="device-status" [class]="device.isOnline ? 'online' : 'offline'">
+                    {{ device.isOnline ? 'Online' : 'Offline' }}
+                </div>
+            </div>
+
+            <div class="device-info-grid">
+                <div class="info-item">
+                    <span class="label">Battery</span>
+                    <span class="value"
+                        [class]="device.batteryPercentage < 20 ? 'critical' : device.batteryPercentage < 50 ? 'warning' : 'good'">
+                        {{ device.batteryPercentage }}%
+                    </span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Last Updated</span>
+                    <span class="value">{{ getTimeAgo(device.lastUpdated) }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Power Status</span>
+                    <span class="value" [class]="device.isOn ? 'on' : 'off'">
+                        {{ device.isOn ? 'ON' : 'OFF' }}
+                    </span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Brightness</span>
+                    <span class="value">{{ device.brightness }}%</span>
+                </div>
+            </div>
+
+            <div class="controls-section">
+                <h3>Controls</h3>
+
+                <div class="control-item">
+                    <div class="control-label">
+                        <span>Power</span>
+                        <span class="control-value">{{ device.isOn ? 'ON' : 'OFF' }}</span>
+                    </div>
+                    <button class="toggle-btn" [class.active]="device.isOn" (click)="togglePower()"
+                        [disabled]="isSaving || !device.isOnline">
+                        <span class="toggle-knob"></span>
+                    </button>
+                </div>
+
+                <div class="control-item">
+                    <div class="control-label">
+                        <span>Brightness</span>
+                        <span class="control-value">{{ device.brightness }}%</span>
+                    </div>
+                    <div class="slider-container">
+                        <input type="range" min="0" max="100" [value]="device.brightness"
+                            (input)="updateBrightness($event)" (change)="saveBrightness()"
+                            [disabled]="isSaving || !device.isOnline || !device.isOn" />
+                    </div>
+                </div>
+
+                @if (!device.isOnline) {
+                <div class="offline-warning">
+                    ⚠️ Device is offline. Controls are disabled.
+                </div>
+                }
+            </div>
+        </div>
+        }
+    </main>
+</div>

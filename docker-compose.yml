@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  api:
+    build: ./api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api/db.json:/app/db.json
+      - ./api/routes.json:/app/routes.json
+    networks:
+      - smart-device-network
+
+  web:
+    build: ./web
+    ports:
+      - "4200:80"
+    depends_on:
+      - api
+    networks:
+      - smart-device-network
+
+  mobile:
+    build: ./mobile
+    ports:
+      - "8100:80"
+    depends_on:
+      - api
+    networks:
+      - smart-device-network
+
+networks:
+  smart-device-network:
+    driver: bridge

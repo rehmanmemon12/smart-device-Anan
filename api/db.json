@@ -1,0 +1,150 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@anansky.com",
+      "password": "admin123",
+      "name": "Admin User"
+    },
+    {
+      "id": "2",
+      "email": "operator@anansky.com",
+      "password": "operator123",
+      "name": "Operator User"
+    }
+  ],
+  "devices": [
+    {
+      "id": "dev-001",
+      "name": "Living Room Light",
+      "isOnline": true,
+      "isOn": true,
+      "batteryPercentage": 85,
+      "brightness": 62,
+      "lastUpdated": "2026-01-18T23:40:00Z",
+      "type": "light",
+      "location": "Living Room"
+    },
+    {
+      "id": "dev-002",
+      "name": "Bedroom Thermostat",
+      "isOnline": true,
+      "isOn": false,
+      "batteryPercentage": 92,
+      "brightness": 50,
+      "lastUpdated": "2026-01-18T23:42:00Z",
+      "type": "thermostat",
+      "location": "Bedroom"
+    },
+    {
+      "id": "dev-003",
+      "name": "Kitchen Sensor",
+      "isOnline": false,
+      "isOn": false,
+      "batteryPercentage": 15,
+      "brightness": 0,
+      "lastUpdated": "2026-01-18T23:00:00Z",
+      "type": "sensor",
+      "location": "Kitchen"
+    },
+    {
+      "id": "dev-004",
+      "name": "Garage Door Controller",
+      "isOnline": true,
+      "isOn": true,
+      "batteryPercentage": 67,
+      "brightness": 100,
+      "lastUpdated": "2026-01-18T23:45:00Z",
+      "type": "controller",
+      "location": "Garage"
+    },
+    {
+      "id": "dev-005",
+      "name": "Front Porch Camera",
+      "isOnline": true,
+      "isOn": true,
+      "batteryPercentage": 18,
+      "brightness": 80,
+      "lastUpdated": "2026-01-18T23:44:00Z",
+      "type": "camera",
+      "location": "Front Porch"
+    },
+    {
+      "id": "dev-006",
+      "name": "Backyard Sprinkler",
+      "isOnline": false,
+      "isOn": false,
+      "batteryPercentage": 8,
+      "brightness": 0,
+      "lastUpdated": "2026-01-18T22:30:00Z",
+      "type": "sprinkler",
+      "location": "Backyard"
+    },
+    {
+      "id": "dev-007",
+      "name": "Office Smart Plug",
+      "isOnline": true,
+      "isOn": true,
+      "batteryPercentage": 100,
+      "brightness": 60,
+      "lastUpdated": "2026-01-18T23:46:00Z",
+      "type": "plug",
+      "location": "Office"
+    },
+    {
+      "id": "dev-008",
+      "name": "Hallway Motion Detector",
+      "isOnline": true,
+      "isOn": true,
+      "batteryPercentage": 45,
+      "brightness": 0,
+      "lastUpdated": "2026-01-18T23:43:00Z",
+      "type": "sensor",
+      "location": "Hallway"
+    },
+    {
+      "id": "dev-009",
+      "name": "Basement Humidity Sensor",
+      "isOnline": false,
+      "isOn": false,
+      "batteryPercentage": 12,
+      "brightness": 0,
+      "lastUpdated": "2026-01-18T21:00:00Z",
+      "type": "sensor",
+      "location": "Basement"
+    },
+    {
+      "id": "dev-010",
+      "name": "Master Bedroom Fan",
+      "isOnline": true,
+      "isOn": false,
+      "batteryPercentage": 78,
+      "brightness": 40,
+      "lastUpdated": "2026-01-18T23:30:00Z",
+      "type": "fan",
+      "location": "Master Bedroom"
+    },
+    {
+      "id": "dev-011",
+      "name": "Outdoor Light String",
+      "isOnline": true,
+      "isOn": true,
+      "batteryPercentage": 55,
+      "brightness": 43,
+      "lastUpdated": "2026-01-18T23:41:00Z",
+      "type": "light",
+      "location": "Patio"
+    },
+    {
+      "id": "dev-012",
+      "name": "Smart Doorbell",
+      "isOnline": true,
+      "isOn": true,
+      "batteryPercentage": 32,
+      "brightness": 100,
+      "lastUpdated": "2026-01-18T23:47:00Z",
+      "type": "doorbell",
+      "location": "Front Door"
+    }
+  ]
+}

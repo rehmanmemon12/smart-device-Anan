@@ -1,0 +1,339 @@
+.device-detail-page {
+    padding: 40px;
+    background: #f8fafc;
+    min-height: calc(100vh - 80px);
+}
+
+.page-header {
+    margin-bottom: 32px;
+
+    .back-link-top {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #64748b;
+        text-decoration: none;
+        font-weight: 500;
+        margin-bottom: 16px;
+        transition: all 0.2s;
+
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        &:hover {
+            color: #667eea;
+        }
+    }
+
+    h1 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1a1a2e;
+        margin: 0;
+    }
+}
+
+.page-content {
+    width: 100%;
+    max-width: none;
+}
+
+.feedback {
+    padding: 14px 20px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    font-weight: 500;
+    animation: slideDown 0.3s ease;
+
+    &.success {
+        background: #dcfce7;
+        color: #16a34a;
+    }
+
+    &.error {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.device-card {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+    .device-header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #f3f4f6;
+
+        .device-icon {
+            font-size: 48px;
+        }
+
+        .device-title {
+            flex: 1;
+
+            h2 {
+                font-size: 24px;
+                font-weight: 700;
+                color: #1a1a2e;
+                margin: 0 0 4px;
+            }
+
+            p {
+                color: #6b7280;
+                margin: 0;
+            }
+        }
+
+        .device-status {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 24px;
+
+            &.online {
+                background: #dcfce7;
+                color: #16a34a;
+            }
+
+            &.offline {
+                background: #fee2e2;
+                color: #dc2626;
+            }
+        }
+    }
+}
+
+.device-info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid #f3f4f6;
+
+    .info-item {
+        text-align: center;
+
+        .label {
+            display: block;
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 6px;
+        }
+
+        .value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a2e;
+
+            &.good {
+                color: #16a34a;
+            }
+
+            &.warning {
+                color: #f59e0b;
+            }
+
+            &.critical {
+                color: #dc2626;
+            }
+
+            &.on {
+                color: #16a34a;
+            }
+
+            &.off {
+                color: #6b7280;
+            }
+        }
+    }
+}
+
+.controls-section {
+    padding-top: 24px;
+
+    h3 {
+        font-size: 18px;
+        font-weight: 600;
+        color: #1a1a2e;
+        margin: 0 0 20px;
+    }
+}
+
+.control-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #f5f7fa;
+    border-radius: 12px;
+    margin-bottom: 12px;
+
+    .control-label {
+        span:first-child {
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .control-value {
+            display: block;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-top: 4px;
+        }
+    }
+}
+
+.toggle-btn {
+    width: 64px;
+    height: 36px;
+    background: #d1d5db;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s;
+
+    &.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .toggle-knob {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 30px;
+        height: 30px;
+        background: white;
+        border-radius: 50%;
+        transition: all 0.3s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    &.active .toggle-knob {
+        left: 31px;
+    }
+}
+
+.slider-container {
+    width: 200px;
+
+    input[type="range"] {
+        width: 100%;
+        height: 8px;
+        background: #e5e7eb;
+        border-radius: 4px;
+        appearance: none;
+        cursor: pointer;
+
+        &::-webkit-slider-thumb {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.offline-warning {
+    background: #fef3c7;
+    color: #92400e;
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 500;
+}
+
+// States
+.loading-state,
+.error-state {
+    text-align: center;
+    padding: 80px 20px;
+    background: white;
+    border-radius: 20px;
+
+    .spinner {
+        width: 48px;
+        height: 48px;
+        border: 4px solid #e5e7eb;
+        border-top-color: #667eea;
+        border-radius: 50%;
+        margin: 0 auto;
+        animation: spin 0.8s linear infinite;
+    }
+
+    h2 {
+        font-size: 20px;
+        color: #1a1a2e;
+        margin: 16px 0 8px;
+    }
+
+    p {
+        color: #6b7280;
+        margin: 0 0 24px;
+    }
+
+    .back-link {
+        color: #667eea;
+        font-weight: 600;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.error-state .error-icon {
+    font-size: 64px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 640px) {
+    .device-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .control-item {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+}

@@ -1,0 +1,96 @@
+<div class="alerts-page">
+    <div class="page-header">
+        <h1>System Alerts</h1>
+        <p>Devices requiring your immediate attention</p>
+    </div>
+
+    <main class="page-content">
+        @if (isLoading) {
+        <div class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading alerts...</p>
+        </div>
+        } @else if (error) {
+        <div class="error-state">
+            <div class="error-icon">⚠️</div>
+            <h2>Connection Error</h2>
+            <p>{{ error }}</p>
+            <button (click)="loadAlerts()">Try Again</button>
+        </div>
+        } @else if (totalAlerts === 0) {
+        <div class="empty-state">
+            <div class="empty-icon">✅</div>
+            <h2>All Clear!</h2>
+            <p>No alerts at this time. All devices are functioning normally.</p>
+            <a routerLink="/devices" class="view-devices-btn">View Devices</a>
+        </div>
+        } @else {
+        <div class="alerts-summary">
+            <div class="summary-card offline">
+                <span class="count">{{ offlineDevices.length }}</span>
+                <span class="label">Offline Devices</span>
+            </div>
+            <div class="summary-card battery">
+                <span class="count">{{ lowBatteryDevices.length }}</span>
+                <span class="label">Low Battery</span>
+            </div>
+        </div>
+
+        @if (offlineDevices.length > 0) {
+        <section class="alert-section">
+            <h2 class="section-title offline">
+                <span class="icon">📡</span>
+                Offline Devices
+                <span class="badge">{{ offlineDevices.length }}</span>
+            </h2>
+            <p class="section-desc">These devices haven't updated in over 15 minutes</p>
+
+            <div class="alert-list">
+                @for (device of offlineDevices; track device.id) {
+                <a [routerLink]="['/devices', device.id]" class="alert-card">
+                    <span class="device-icon">{{ getDeviceIcon(device.type) }}</span>
+                    <div class="device-info">
+                        <h3>{{ device.name }}</h3>
+                        <p>{{ device.location }}</p>
+                    </div>
+                    <div class="alert-meta">
+                        <span class="status offline">Offline</span>
+                        <span class="time">{{ getTimeAgo(device.lastUpdated) }}</span>
+                    </div>
+                </a>
+                }
+            </div>
+        </section>
+        }
+
+        @if (lowBatteryDevices.length > 0) {
+        <section class="alert-section">
+            <h2 class="section-title battery">
+                <span class="icon">🔋</span>
+                Low Battery Devices
+                <span class="badge">{{ lowBatteryDevices.length }}</span>
+            </h2>
+            <p class="section-desc">These devices have less than 20% battery remaining</p>
+
+            <div class="alert-list">
+                @for (device of lowBatteryDevices; track device.id) {
+                <a [routerLink]="['/devices', device.id]" class="alert-card">
+                    <span class="device-icon">{{ getDeviceIcon(device.type) }}</span>
+                    <div class="device-info">
+                        <h3>{{ device.name }}</h3>
+                        <p>{{ device.location }}</p>
+                    </div>
+                    <div class="alert-meta">
+                        <span class="battery-level">{{ device.batteryPercentage }}%</span>
+                        <span class="status" [class]="device.isOnline ? 'online' : 'offline'">
+                            {{ device.isOnline ? 'Online' : 'Offline' }}
+                        </span>
+                    </div>
+                </a>
+                }
+            </div>
+        </section>
+        }
+        }
+    </main>
+</div>
